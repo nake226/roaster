@@ -1,16 +1,74 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     /**
      * stateで何を管理するか
      * want：部署名
      */
     this.state = {
-      location: "三浦海岸"
+      isLogin: false,
+      departmentList: [],
+      user: null,
+      group: null
     };
+  }
+
+  // コンポーネントのマウント時
+  componentDidMount() {
+    this.httpClient = axios.create({
+      baseURL: "https://kadou.i.nijibox.net/api",
+      withCredentials: true
+    });
+
+    // 認証関数の呼び出し
+    this.loadAuth()
+      .then(() => {
+        if (!this.state.isLogin) {
+          return Promise.resolve();
+        }
+        // 初期表示で出てくる部署一覧
+        return this.loadDepartments();
+      })
+      .catch(err => {
+        alert("APIがエラーを返しました\n\n" + err);
+      });
+  }
+
+  // 認証関数の定義
+  loadAuth() {
+    return this.httpClient
+      .get("/auth", { params: { callback: "http://localhost:3000" } })
+      .then(this.commonResponseHandling)
+      .then(result => {
+        if (result.is_login) {
+          this.setState({ isLogin: true });
+        } else if (result.auth_url) {
+          window.location.href = result.auth_url;
+        }
+      });
+  }
+
+  // 部署名を返す
+  loadDepartments() {
+    return this.httpClient
+      .get("/who/departments")
+      .then(this.commonResponseHandling)
+      .then(result => {
+        this.setState({ departmentList: result });
+      });
+  }
+
+  commonResponseHandling(res) {
+    console.debug(res);
+    if (res.data.code !== "200") {
+      console.error(res.data.data);
+      return Promise.reject("API Error:" + res.data.data.message);
+    }
+    return Promise.resolve(res.data.data);
   }
 
   /**
@@ -58,6 +116,11 @@ class App extends Component {
             Member：1つのTodoみたいな感じ
               ./components/配下に置く
          */}
+        <ul>
+          {this.state.departmentList.map((row, index) => {
+            return <li key={index}>{row.department_name}</li>;
+          })}
+        </ul>
 
         {/* フッター
           must：特にないなあ
