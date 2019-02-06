@@ -31,7 +31,7 @@ class App extends Component {
           return Promise.resolve();
         }
         // 初期表示で出てくる部署一覧
-        return this.loadDepartments();
+        return this.loadUser();
       })
       .catch(err => {
         alert("APIがエラーを返しました\n\n" + err);
@@ -59,6 +59,16 @@ class App extends Component {
       .then(this.commonResponseHandling)
       .then(result => {
         this.setState({ departmentList: result });
+      });
+  }
+
+  // ユーザを返す
+  loadUser() {
+    return this.httpClient
+      .get("/who/user/1")
+      .then(this.commonResponseHandling)
+      .then(result => {
+        this.setState({ user: result });
       });
   }
 
@@ -116,6 +126,15 @@ class App extends Component {
             Member：1つのTodoみたいな感じ
               ./components/配下に置く
          */}
+        {this.state.user && (
+          <div>
+            {this.state.user.user_id}
+            {this.state.user.user_name}
+            <br />
+            {this.state.user.description}
+            <img src={this.state.user.main_photo_url} alt="aaa" />
+          </div>
+        )}
         <ul>
           {this.state.departmentList.map((row, index) => {
             return <li key={index}>{row.department_name}</li>;
