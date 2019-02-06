@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+// クリエイティブ室の一時的な配列
+var creativeRoaster = [];
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -78,7 +81,42 @@ class App extends Component {
       .get("/who/search?department_id=5")
       .then(this.commonResponseHandling)
       .then(result => {
-        this.setState({ group: result });
+        // ここで20名
+        creativeRoaster = result;
+        if (result.item_list.length === 20) {
+          this.httpClient
+            .get("/who/search?department_id=5&page=2")
+            .then(this.commonResponseHandling)
+            .then(result => {
+              // ここで40名
+              creativeRoaster.item_list = creativeRoaster.item_list.concat(
+                result.item_list
+              );
+              if (result.item_list.length === 20) {
+                this.httpClient
+                  .get("/who/search?department_id=5&page=3")
+                  .then(this.commonResponseHandling)
+                  .then(result => {
+                    // ここで60名
+                    creativeRoaster.item_list = creativeRoaster.item_list.concat(
+                      result.item_list
+                    );
+                    if (result.item_list.length !== 20) {
+                      console.log("３回で取得完了");
+                      this.setState({ group: creativeRoaster });
+                    } else {
+                      console("クリエイティブ室そんなに増えたの？");
+                    }
+                  });
+              } else {
+                console.log("２回で取得完了");
+                this.setState({ group: creativeRoaster });
+              }
+            });
+        } else {
+          console.log("１回で取得完了");
+          this.setState({ group: creativeRoaster });
+        }
       });
   }
 
