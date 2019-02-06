@@ -132,8 +132,6 @@ class App extends Component {
 
   // ワード検索
   getWordSearchResult(word) {
-    console.log(word);
-
     return this.httpClient
       .get("/who/search/", { params: { query: word } })
       .then(this.commonResponseHandling)
@@ -143,7 +141,6 @@ class App extends Component {
   }
 
   commonResponseHandling(res) {
-    console.debug(res);
     if (res.data.code !== "200") {
       console.error(res.data.data);
       return Promise.reject("API Error:" + res.data.data.message);
