@@ -4,10 +4,34 @@ class App extends Component {
   constructor() {
     super();
 
+    /**
+     * stateで何を管理するか
+     * want：部署名
+     */
     this.state = {
       location: "三浦海岸"
     };
   }
+
+  /**
+   * 関数のまとめ
+   */
+
+  /*
+   * API通信をする関数
+   * componentDidMount()で行う
+   */
+
+  /**
+   * 社員を表示する関数
+   * loadUser()的な感じ
+   */
+
+  /**
+   * 部署名を変更する関数
+   * changeDep()的な感じ
+   */
+
   render() {
     return (
       <div className="App">
