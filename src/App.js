@@ -31,7 +31,7 @@ class App extends Component {
           return Promise.resolve();
         }
         // 初期表示で出てくる部署一覧
-        return this.loadUser();
+        return this.loadCreative();
       })
       .catch(err => {
         alert("APIがエラーを返しました\n\n" + err);
@@ -69,6 +69,16 @@ class App extends Component {
       .then(this.commonResponseHandling)
       .then(result => {
         this.setState({ user: result });
+      });
+  }
+
+  // クリエイティブ室を返す
+  loadCreative() {
+    return this.httpClient
+      .get("/who/search?department_id=5")
+      .then(this.commonResponseHandling)
+      .then(result => {
+        this.setState({ group: result });
       });
   }
 
@@ -140,6 +150,23 @@ class App extends Component {
             return <li key={index}>{row.department_name}</li>;
           })}
         </ul>
+
+        {this.state.group && (
+          <div>
+            {this.state.group.item_list.user_id}
+            aaaa
+            <ul>
+              {this.state.group.item_list.map((row, index) => {
+                return (
+                  <li key={index}>
+                    <img src={row.photo_url} alt="aaa" />
+                    {row.user_name}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
 
         {/* フッター
           must：特にないなあ
