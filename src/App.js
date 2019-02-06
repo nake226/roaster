@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+import MemberList from "./components/MemberList";
+import Form from "./components/Form";
 
 // クリエイティブ室の一時的な配列
 var creativeRoaster = [];
@@ -13,6 +15,7 @@ class App extends Component {
      * want：部署名
      */
     this.state = {
+      inputText: "",
       isLogin: false,
       departmentList: [],
       user: null,
@@ -120,6 +123,25 @@ class App extends Component {
       });
   }
 
+  // テキストのセット
+  setQuery(e) {
+    this.setState({
+      inputText: e.target.value
+    });
+  }
+
+  // ワード検索
+  getWordSearchResult(word) {
+    console.log(word);
+
+    return this.httpClient
+      .get("/who/search/", { params: { query: word } })
+      .then(this.commonResponseHandling)
+      .then(result => {
+        this.setState({ group: result });
+      });
+  }
+
   commonResponseHandling(res) {
     console.debug(res);
     if (res.data.code !== "200") {
@@ -157,14 +179,16 @@ class App extends Component {
           component：
             Header：./layout/配下に置く
          */}
-        <header className="App-header">
-          <p>- Niji Roaster -</p>
+        <header className="header">
+          <p className="header__title">- Niji Roaster -</p>
+          <img
+            src="https://nijibox.jp/wp-content/themes/nijibox/images/common/logo_nb.svg"
+            alt="ニジボックス!!"
+          />
         </header>
-
         {/* ナビ
           want：部署を押下すると表示が変わるナビ
          */}
-
         {/* コンテンツ
           must：社員が誰かしら表示される
           want：アニメーション
@@ -174,6 +198,15 @@ class App extends Component {
             Member：1つのTodoみたいな感じ
               ./components/配下に置く
          */}
+
+        {/* 検索フォーム */}
+        <Form
+          className="searchForm"
+          setQuery={e => this.setQuery(e)}
+          getWordSearchResult={word => this.getWordSearchResult(word)}
+          inputText={this.state.inputText}
+        />
+
         {this.state.user && (
           <div>
             {this.state.user.user_id}
@@ -188,24 +221,12 @@ class App extends Component {
             return <li key={index}>{row.department_name}</li>;
           })}
         </ul>
-
+        {/* クリエイティブ室の表示 */}
         {this.state.group && (
           <div>
-            {this.state.group.item_list.user_id}
-            aaaa
-            <ul>
-              {this.state.group.item_list.map((row, index) => {
-                return (
-                  <li key={index}>
-                    <img src={row.photo_url} alt="aaa" />
-                    {row.user_name}
-                  </li>
-                );
-              })}
-            </ul>
+            <MemberList group={this.state.group} />
           </div>
         )}
-
         {/* フッター
           must：特にないなあ
           want：上部に戻る？的な？
