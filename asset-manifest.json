@@ -1,11 +1,11 @@
 {
-  "main.js": "/roaster/static/js/main.f8e97649.chunk.js",
-  "main.js.map": "/roaster/static/js/main.f8e97649.chunk.js.map",
+  "main.js": "/roaster/static/js/main.7874604e.chunk.js",
+  "main.js.map": "/roaster/static/js/main.7874604e.chunk.js.map",
   "static/js/1.a9b940e9.chunk.js": "/roaster/static/js/1.a9b940e9.chunk.js",
   "static/js/1.a9b940e9.chunk.js.map": "/roaster/static/js/1.a9b940e9.chunk.js.map",
   "runtime~main.js": "/roaster/static/js/runtime~main.b076f862.js",
   "runtime~main.js.map": "/roaster/static/js/runtime~main.b076f862.js.map",
   "index.html": "/roaster/index.html",
-  "precache-manifest.f2b1ced5eab602d497dca6b0bf6af56b.js": "/roaster/precache-manifest.f2b1ced5eab602d497dca6b0bf6af56b.js",
+  "precache-manifest.3a7a8df21d4cc7967d60198e45033ac9.js": "/roaster/precache-manifest.3a7a8df21d4cc7967d60198e45033ac9.js",
   "service-worker.js": "/roaster/service-worker.js"
 }

@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/roaster/static/js/runtime~main.b076f862.js"
   },
   {
-    "revision": "f8e9764916f0748c6191",
-    "url": "/roaster/static/js/main.f8e97649.chunk.js"
+    "revision": "7874604efaf6e414bb7d",
+    "url": "/roaster/static/js/main.7874604e.chunk.js"
   },
   {
     "revision": "a9b940e93367136c5d05",
     "url": "/roaster/static/js/1.a9b940e9.chunk.js"
   },
   {
-    "revision": "efca6d92c21ae300a28fcb1658fc6290",
+    "revision": "d9d99a759b115a571141bc0ee3034cdf",
     "url": "/roaster/index.html"
   }
 ];
