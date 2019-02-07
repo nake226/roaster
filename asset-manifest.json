@@ -1,11 +1,11 @@
 {
-  "main.js": "/roaster/static/js/main.45e3d7ea.chunk.js",
-  "main.js.map": "/roaster/static/js/main.45e3d7ea.chunk.js.map",
-  "static/js/1.c695632b.chunk.js": "/roaster/static/js/1.c695632b.chunk.js",
-  "static/js/1.c695632b.chunk.js.map": "/roaster/static/js/1.c695632b.chunk.js.map",
+  "main.js": "/roaster/static/js/main.f8e97649.chunk.js",
+  "main.js.map": "/roaster/static/js/main.f8e97649.chunk.js.map",
+  "static/js/1.a9b940e9.chunk.js": "/roaster/static/js/1.a9b940e9.chunk.js",
+  "static/js/1.a9b940e9.chunk.js.map": "/roaster/static/js/1.a9b940e9.chunk.js.map",
   "runtime~main.js": "/roaster/static/js/runtime~main.b076f862.js",
   "runtime~main.js.map": "/roaster/static/js/runtime~main.b076f862.js.map",
   "index.html": "/roaster/index.html",
-  "precache-manifest.bc77da87bc23619a22e37d49566d314c.js": "/roaster/precache-manifest.bc77da87bc23619a22e37d49566d314c.js",
+  "precache-manifest.f2b1ced5eab602d497dca6b0bf6af56b.js": "/roaster/precache-manifest.f2b1ced5eab602d497dca6b0bf6af56b.js",
   "service-worker.js": "/roaster/service-worker.js"
 }
